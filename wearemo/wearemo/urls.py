@@ -37,6 +37,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include("credicts.urls")),
-    path('api-token-auth/', views.obtain_auth_token),
+    path('api-token-auth/', views.obtain_auth_token, name='api-token-auth'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
 ]

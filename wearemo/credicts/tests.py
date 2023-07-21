@@ -1,9 +1,11 @@
 # BEGIN: 1a2b3c4d5e6f
+from typing import Dict, List
+
+from django.contrib.auth.models import User
 from django.test import TestCase
-from rest_framework.test import APIClient
-from rest_framework import status
-from typing import List, Dict
 from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APIClient
 
 from .models import Customers, Loans, Payment, PaymentDetails
 from .serializers import CustomersSerializer
@@ -12,6 +14,17 @@ from .serializers import CustomersSerializer
 class CustomersViewSetTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
+
+        #Create user
+        self.user: User = User.objects.create_user(
+            username="test",
+            password="test"
+        )
+
+        #Login
+        url: str = reverse("api-token-auth")
+        response = self.client.post(url, {"username": "test", "password": "test"}, format='json')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + response.data['token'])
 
     def test_create_customer(self):
 
@@ -93,6 +106,17 @@ class LoansViewSetTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
 
+        #Create user
+        self.user: User = User.objects.create_user(
+            username="test",
+            password="test"
+        )
+
+        #Login
+        url: str = reverse("api-token-auth")
+        response = self.client.post(url, {"username": "test", "password": "test"}, format='json')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + response.data['token'])
+
     def test_create_loan(self):
             
             """
@@ -124,6 +148,17 @@ class PaymentViewSetTestCase(TestCase):
 
     def setUp(self):
         self.client = APIClient()
+
+        #Create user
+        self.user: User = User.objects.create_user(
+            username="test",
+            password="test"
+        )
+
+        #Login
+        url: str = reverse("api-token-auth")
+        response = self.client.post(url, {"username": "test", "password": "test"}, format='json')
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + response.data['token'])
 
     def test_create_payment(self):
             
