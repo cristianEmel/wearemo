@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'credicts'
+    'drf_yasg',
+    'credicts',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+APPEND_SLASH=False
 
 ROOT_URLCONF = 'wearemo.urls'
 
@@ -69,6 +73,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'wearemo.wsgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
 
 
 # Database
